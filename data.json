@@ -1,0 +1,320 @@
+{
+    "Product": [
+        {
+            "id": 1,
+            "name": "Cherry Lady",
+            "sale-price": 30.00,
+            "price": 35.00,
+            "description": "Being able to read a novel in another language and understand it is a huge achievement. You’ll feel accomplished the moment you read that final page, close the book, and reflect on the experience. You might find yourself at the last page faster than you thought—once you begin reading these...",
+            "quantity": 50,
+            "color": "red",
+            "size": "S",
+            "type": "Rose",
+            "image": {
+                "image01": "https://tully-store-demo.myshopify.com/cdn/shop/products/1_b9cc026b-f1fb-41dc-9634-cc0df34050e9.jpg?v=1663227201",
+                "image02": "https://tully-store-demo.myshopify.com/cdn/shop/products/2_b8ef7858-abcf-48a8-890b-c0f6fd1840ce.jpg?v=1663227201",
+                "image03": "https://tully-store-demo.myshopify.com/cdn/shop/products/3_dc4140d4-5efb-455c-bfc1-ae3f95d7a810.jpg?v=1663227201"
+            },
+            "status": "active",
+            "category": "Funeral Flowers"
+        },
+        {
+            "id": 2,
+            "name": "Crimson Dream",
+            "sale-price": 0,
+            "price": 30.00,
+            "description": "Being able to read a novel in another language and understand it is a huge achievement. You’ll feel accomplished the moment you read that final page, close the book, and reflect on the experience. You might find yourself at the last page faster than you thought—once you begin reading these...",
+            "quantity": 50,
+            "color": "red",
+            "size": "S",
+            "type": "Rose",
+            "image": {
+                "image01": "https://tully-store-demo.myshopify.com/cdn/shop/products/1_91137464-9045-413b-b7a0-2dfa04b4b7f7.jpg?v=1663226920",
+                "image02": "https://tully-store-demo.myshopify.com/cdn/shop/products/3_12018ac0-4bce-4aab-915e-2ddc373d459f.jpg?v=1663226920",
+                "image03": "https://tully-store-demo.myshopify.com/cdn/shop/products/4_c5ed1826-2228-4a12-945f-216db1d857c5.jpg?v=1663226920"
+            },
+            "status": "active",
+            "category": "Best Sellers"
+        },
+        {
+            "id": 3,
+            "name": "Golden Sunrise",
+            "sale-price": 0,
+            "price": 25.00,
+            "description": "Being able to read a novel in another language and understand it is a huge achievement. You’ll feel accomplished the moment you read that final page, close the book, and reflect on the experience. You might find yourself at the last page faster than you thought—once you begin reading these...",
+            "quantity": 50,
+            "color": "yellow",
+            "size": "M",
+            "type": "Rose",
+            "image": {
+                "image01": "https://tully-store-demo.myshopify.com/cdn/shop/products/1_3ad26d18-dae8-4d03-b9ff-34b91e3f570c.jpg?v=1663227347",
+                "image02": "https://tully-store-demo.myshopify.com/cdn/shop/products/3_952873c2-2499-42b7-9c00-7bb6fefaa188.jpg?v=1663227347",
+                "image03": "https://tully-store-demo.myshopify.com/cdn/shop/products/4_d60f8b42-edd4-4ef4-a26c-b523f99202b2.jpg?v=1663227347"
+            },
+            "status": "active",
+            "category": "Flower Subscription"
+        },
+        {
+            "id": 4,
+            "name": "Green Pastures",
+            "sale-price": 20.00,
+            "price": 25.00,
+            "description": "Being able to read a novel in another language and understand it is a huge achievement. You’ll feel accomplished the moment you read that final page, close the book, and reflect on the experience. You might find yourself at the last page faster than you thought—once you begin reading these...",
+            "quantity": 10,
+            "color": "green",
+            "size": "M",
+            "type": "Iris",
+            "image": {
+                "image01": "https://tully-store-demo.myshopify.com/cdn/shop/products/1_62358b2b-d652-4728-a277-4aaef6ee4f12.jpg?v=1663227522",
+                "image02": "https://tully-store-demo.myshopify.com/cdn/shop/products/3_339ddf23-6ff0-4ea9-9139-b244c2e43756.jpg?v=1663227522",
+                "image03": "https://tully-store-demo.myshopify.com/cdn/shop/products/4_2415c4dd-7b00-4133-bb3c-3f201d46208f.jpg?v=1663227523"
+            },
+            "status": "active",
+            "category": "Flower Subscription"
+        },
+        {
+            "id": 5,
+            "name": "Just Peachy",
+            "sale-price": 28.00,
+            "price": 30.00,
+            "description": "Being able to read a novel in another language and understand it is a huge achievement. You’ll feel accomplished the moment you read that final page, close the book, and reflect on the experience. You might find yourself at the last page faster than you thought—once you begin reading these...",
+            "quantity": 50,
+            "color": "pink",
+            "size":"L",
+            "type": "Iris",
+            "image": {
+                "image01": "https://tully-store-demo.myshopify.com/cdn/shop/products/1_f13cfbe2-3d22-45a8-8e76-cfabe05e42c1.jpg?v=1663227467",
+                "image02": "https://tully-store-demo.myshopify.com/cdn/shop/products/3_2636f2a8-e8be-4ab4-9cc0-ee9539ee2b68.jpg?v=1663227467",
+                "image03": "https://tully-store-demo.myshopify.com/cdn/shop/products/4_ba031810-b5ac-4032-accd-0013ca0970eb.jpg?v=1663227467"
+            },
+            "status": "active",
+            "category": "Hot Deals"
+        },
+        {
+            "id": 6,
+            "name": "Lavender Sky",
+            "sale-price": 18.50,
+            "price": 20.00,
+            "description": "Being able to read a novel in another language and understand it is a huge achievement. You’ll feel accomplished the moment you read that final page, close the book, and reflect on the experience. You might find yourself at the last page faster than you thought—once you begin reading these...",
+            "quantity": 50,
+            "color": "pink",
+            "size": "XL",
+            "type": "Điệp",
+            "image": {
+                "image01": "https://tully-store-demo.myshopify.com/cdn/shop/products/1_196f6ed6-762e-41ea-9099-55c605294b47.jpg?v=1663226968",
+                "image02": "https://tully-store-demo.myshopify.com/cdn/shop/products/3_31662eee-cea7-41a6-ad3e-127ce1307471.jpg?v=1663226967",
+                "image03": "https://tully-store-demo.myshopify.com/cdn/shop/products/4_0008f4d9-73bd-4406-9023-24a5037c081f.jpg?v=1663226967"
+            },
+            "status": "active",
+            "category": "Hot Deals"
+        },
+        {
+            "id": 7,
+            "name": "Lilac Charm",
+            "sale-price": 35.50,
+            "price": 40.00,
+            "description": "Being able to read a novel in another language and understand it is a huge achievement. You’ll feel accomplished the moment you read that final page, close the book, and reflect on the experience. You might find yourself at the last page faster than you thought—once you begin reading these...",
+            "quantity": 50,
+            "color": "white",
+            "size": "XL",
+            "type": "Điệp",
+            "image": {
+                "image01": "https://tully-store-demo.myshopify.com/cdn/shop/products/1.jpg?v=1663226761",
+                "image02": "https://tully-store-demo.myshopify.com/cdn/shop/products/3.jpg?v=1663226761",
+                "image03": "https://tully-store-demo.myshopify.com/cdn/shop/products/4.jpg?v=1663226761"
+            },
+            "status": "active",
+            "category": "Wedding Flower"
+        },
+        {
+            "id": 8,
+            "name": "Meringue",
+            "sale-price": 0,
+            "price": 40.00,
+            "description": "Being able to read a novel in another language and understand it is a huge achievement. You’ll feel accomplished the moment you read that final page, close the book, and reflect on the experience. You might find yourself at the last page faster than you thought—once you begin reading these...",
+            "quantity": 50,
+            "color": "white",
+            "size": "L",
+            "type": "Iris",
+            "image": {
+                "image01": "https://tully-store-demo.myshopify.com/cdn/shop/products/1_06e9b5db-b7ea-49bf-ba27-4289a81604e0.jpg?v=1663227256",
+                "image02": "https://tully-store-demo.myshopify.com/cdn/shop/products/3_230573f8-c9d0-4c55-a31b-52f95b7bfd4d.jpg?v=1663227256",
+                "image03": "https://tully-store-demo.myshopify.com/cdn/shop/products/4_d3828671-595e-4f96-aab0-a392406acd4e.jpg?v=1663227256"
+            },
+            "status": "active",
+            "category": "Wedding Flower"
+        },
+        {
+            "id": 9,
+            "name": "Marylin Monroe",
+            "sale-price": 38.00,
+            "price": 40.00,
+            "description": "Being able to read a novel in another language and understand it is a huge achievement. You’ll feel accomplished the moment you read that final page, close the book, and reflect on the experience. You might find yourself at the last page faster than you thought—once you begin reading these...",
+            "quantity": 50,
+            "color": "white",
+            "size": "XL",
+            "type": "Lavender",
+            "image": {
+                "image01": "https://tully-store-demo.myshopify.com/cdn/shop/products/1_3398188c-70e2-4f64-9b89-cf0bcc083689.jpg?v=1663227308",
+                "image02": "https://tully-store-demo.myshopify.com/cdn/shop/products/3_aebb75e2-c413-4929-9976-c305db2fb5ef.jpg?v=1663227308",
+                "image03": "https://tully-store-demo.myshopify.com/cdn/shop/products/4_0fe715a1-b1a9-4f3e-b205-95aa72b5e9ca.jpg?v=1663227308"
+            },
+            "status": "active",
+            "category": "Wedding Flower"
+        },
+        {
+            "id": 10,
+            "name": "Peppermint Cream",
+            "sale-price": 0,
+            "price": 25.00,
+            "description": "Being able to read a novel in another language and understand it is a huge achievement. You’ll feel accomplished the moment you read that final page, close the book, and reflect on the experience. You might find yourself at the last page faster than you thought—once you begin reading these...",
+            "quantity": 15,
+            "color": "green",
+            "size": "S",
+            "type": "Orchid",
+            "image": {
+                "image01": "https://tully-store-demo.myshopify.com/cdn/shop/products/4_6eea85c7-2fc3-4285-a17e-4d917996842c.jpg?v=1663226826",
+                "image02": "https://tully-store-demo.myshopify.com/cdn/shop/products/3_97d85d7f-275f-4c70-a782-4281309cb6d2.jpg?v=1663226826",
+                "image03": "https://tully-store-demo.myshopify.com/cdn/shop/products/2_4e07d3e5-ca4a-4862-8dba-8f5421ca9bfe.jpg?v=1663226826"
+            },
+            "status": "active",
+            "category": "Funeral Flowers"
+        },
+        {
+            "id": 11,
+            "name": "Pink Panther",
+            "sale-price": 20.00,
+            "price": 25.00,
+            "description": "Being able to read a novel in another language and understand it is a huge achievement. You’ll feel accomplished the moment you read that final page, close the book, and reflect on the experience. You might find yourself at the last page faster than you thought—once you begin reading these...",
+            "quantity": 15,
+            "color": "red",
+            "size": "L",
+            "type": "Rose",
+            "image": {
+                "image01": "https://tully-store-demo.myshopify.com/cdn/shop/products/1_8ba70a97-f73a-47c4-8043-c950f4cdb305.jpg?v=1663227576",
+                "image02": "https://tully-store-demo.myshopify.com/cdn/shop/products/3_b73f81d6-50c5-465e-82da-0a9606b74510.jpg?v=1663227576",
+                "image03": "https://tully-store-demo.myshopify.com/cdn/shop/products/4_e881a970-9060-4cb0-9d7d-977b974042e2.jpg?v=1663227576"
+            },
+            "status": "active",
+            "category": "Best Sellers"
+        },
+        {
+            "id": 12,
+            "name": "Wild Meadow",
+            "sale-price": 0,
+            "price": 27.00,
+            "description": "Being able to read a novel in another language and understand it is a huge achievement. You’ll feel accomplished the moment you read that final page, close the book, and reflect on the experience. You might find yourself at the last page faster than you thought—once you begin reading these...",
+            "quantity": 15,
+            "color": "brown",
+            "size": "M",
+            "type": "Iris",
+            "image": {
+                "image01": "https://tully-store-demo.myshopify.com/cdn/shop/products/1_704e3bb4-49d2-4511-afd3-1fb30f19ea6a.jpg?v=1663227135",
+                "image02": "https://tully-store-demo.myshopify.com/cdn/shop/products/3_f2ba88be-088f-491e-a5cd-cfefbd912316.jpg?v=1663227135",
+                "image03": "https://tully-store-demo.myshopify.com/cdn/shop/products/4_ff2d89eb-4700-417b-a3d1-14568508224f.jpg?v=1663227134"
+            },
+            "status": "active",
+            "category": "Flower Subscription"
+        },
+        {
+            "id": 13,
+            "name": "Wild Meadow",
+            "sale-price": 0,
+            "price": 27.00,
+            "description": "Being able to read a novel in another language and understand it is a huge achievement. You’ll feel accomplished the moment you read that final page, close the book, and reflect on the experience. You might find yourself at the last page faster than you thought—once you begin reading these...",
+            "quantity": 15,
+            "color": "blue",
+            "size": "XL",
+            "type": "Iris",
+            "image": {
+                "image01": "https://tully-store-demo.myshopify.com/cdn/shop/products/1_704e3bb4-49d2-4511-afd3-1fb30f19ea6a.jpg?v=1663227135",
+                "image02": "https://tully-store-demo.myshopify.com/cdn/shop/products/3_f2ba88be-088f-491e-a5cd-cfefbd912316.jpg?v=1663227135",
+                "image03": "https://tully-store-demo.myshopify.com/cdn/shop/products/4_ff2d89eb-4700-417b-a3d1-14568508224f.jpg?v=1663227134"
+            },
+            "status": "active",
+            "category": "Flower Subscription"
+        },
+        {
+            "id": 14,
+            "name": "Timeless Beauty",
+            "sale-price": 0,
+            "price": 30.00,
+            "description": "Being able to read a novel in another language and understand it is a huge achievement. You’ll feel accomplished the moment you read that final page, close the book, and reflect on the experience. You might find yourself at the last page faster than you thought—once you begin reading these...",
+            "quantity": 15,
+            "color": "yellow",
+            "size": "XL",
+            "type": "Iris",
+            "image": {
+                "image01": "https://tully-store-demo.myshopify.com/cdn/shop/products/1_5b075e7b-146f-4599-8890-d461144784a1.jpg?v=1663227026",
+                "image02": "https://tully-store-demo.myshopify.com/cdn/shop/products/3_af725949-7ed1-4a1a-b947-a39716e68059.jpg?v=1663227026",
+                "image03": "https://tully-store-demo.myshopify.com/cdn/shop/products/4_2d79b0e9-80ca-43bf-bbfe-6af5c060f849.jpg?v=1663227026"
+            },
+            "status": "active",
+            "category": "Flower Subscription"
+        }
+    ],
+    "category": [
+        {
+            "id": 1,
+            "name": "Best Sellers",
+            "status": "active",
+            "image": "https://tully-store-demo.myshopify.com/cdn/shop/files/brand3.png?v=1663637159"
+        },
+        {
+            "id": 2,
+            "name": "Flower Subscription",
+            "status": "active",
+            "image": "https://tully-store-demo.myshopify.com/cdn/shop/files/brand1.png?v=1663637158"
+        },
+        {
+            "id": 3,
+            "name": "Gift Flower",
+            "status": "active",
+            "image": "https://tully-store-demo.myshopify.com/cdn/shop/files/brand5.png?v=1663637158"
+        },
+        {
+            "id": 4,
+            "name": "Hot Deals",
+            "status": "active",
+            "image": "https://tully-store-demo.myshopify.com/cdn/shop/files/brand6.png?v=1663637158"
+        },
+        {
+            "id": 5,
+            "name": "Wedding Flower",
+            "status": "active",
+            "image": "https://tully-store-demo.myshopify.com/cdn/shop/files/brand4.png?v=1663637159"
+        },
+        {
+            "id": 6,
+            "name": "Funeral Flowers",
+            "status": "active",
+            "image": "https://tully-store-demo.myshopify.com/cdn/shop/files/brand2.png?v=1663637158"
+        }
+    ],
+    "Banner": [
+        {
+            "id": 1,
+            "title":"Flower shop",
+            "description": "The freshest  flowers are here", 
+            "image": "https://tully-store-demo.myshopify.com/cdn/shop/files/sli5_1.jpg?v=1664525970"
+        },
+        {
+            "id": 2,
+            "title":"Tully store",
+            "description": "We deliver fresh  flowers daily", 
+            "image": "https://tully-store-demo.myshopify.com/cdn/shop/files/sli5.jpg?v=1664525970"
+        },
+        {
+            "id": 1,
+            "title":"Flower shop",
+            "description": "We are in love with Flowers", 
+            "image": "https://tully-store-demo.myshopify.com/cdn/shop/files/sli1.jpg?v=1664528138"
+        },
+        {
+            "id": 1,
+            "title":"Flower shop",
+            "description": "The freshest  flowers are here", 
+            "image": "https://tully-store-demo.myshopify.com/cdn/shop/files/sli1_1.jpg?v=1664528138"
+        }
+    ]
+}
