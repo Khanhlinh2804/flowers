@@ -1,3 +1,16 @@
+<script setup>
+import { useCartStore } from '@/stores/useCartStore';
+import { useWishlistStore } from '@/stores/useWishlistStore';
+import { onMounted } from 'vue';
+
+    const cartStore = useCartStore();
+    const wishlistStore = useWishlistStore();
+
+    onMounted(() => {
+        cartStore.fetchProducts();
+    })
+</script>
+
 <template>
     <header>
         <div class="container">
@@ -33,17 +46,16 @@
                             <i class="fa-regular fa-user"></i>
                         </router-link>
                     </li>
-                    <li class="header__icon-item">
-                        <router-link :to="{name : 'client.wishlist'}" class="header__item-link">
-                            <i class="fa-regular fa-heart">
-
-                            </i>
+                    <li class="header__icon-item icon-cart">
+                        <router-link :to="{name : 'client.wishlist'}" class="icon-cart-header header__item-link">
+                            <i class="fa-regular fa-heart"> </i>
+                            <p>{{ wishlistStore.countWishlistItem }}</p>
                         </router-link>
                     </li>
                     <li class="header__icon-item icon-cart">
                         <router-link to="/cart" class="header__item-link icon-cart-header">
                             <i class="fa-solid fa-bag-shopping"> </i>
-                            <p>2</p>
+                            <p>{{ cartStore.countCartItem }}</p>
                         </router-link>
                     </li>
                 </ul>

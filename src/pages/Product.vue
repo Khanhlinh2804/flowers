@@ -1,6 +1,7 @@
-<script>
+<script setup>
 import { onMounted, ref, computed, watchEffect } from 'vue';
 import Item from '../components/Item.vue';
+import { useCartStore } from '@/stores/useCartStore';
 
 const priceRanges = [
     { label: '$10 - $20', min: 10, max: 20 },
@@ -8,128 +9,99 @@ const priceRanges = [
     { label: '$30 - $50', min: 30, max: 50 },
 ];
 
-export default {
-    components: {
-        Item,
-    },
-    setup() {
-        const url = 'http://localhost:3000/Product';
-        const title = ref('Product');
-        const products = ref([]);
-        const selectPrice = ref([]);
-        const selectSize = ref([]);
-        const selectColor = ref([]);
-        const selectCategory = ref('All product');
+const url = 'http://localhost:3000/Product';
+const title = ref('Product');
+const products = ref([]);
+const selectPrice = ref([]);
+const selectSize = ref([]);
+const selectColor = ref([]);
+const selectCategory = ref('All product');
 
-        onMounted(() => {
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    products.value = data;
-                })
-                .catch(error => console.error('Error:', error));
+
+
+onMounted(() => {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            products.value = data;
+        })
+        .catch(error => console.error('Error:', error));
+});
+
+const uniqueSizes = computed(() => {
+    const sizes = products.value.map(product => product.size);
+    return [...new Set(sizes)];
+});
+
+const uniqueCategories = computed(() => {
+    const categories = products.value.map(product => product.category);
+    return ['All product', ...new Set(categories)];
+});
+
+const uniqueColors = computed(() => {
+    const colors = products.value.map(product => product.color);
+    return [...new Set(colors)];
+});
+
+const filteredProducts = computed(() => {
+    let filtered = products.value;
+    if (selectCategory.value !== 'All product') {
+        filtered = filtered.filter(product => product.category === selectCategory.value);
+    }
+    if (selectPrice.value.length > 0) {
+        filtered = filtered.filter(product => {
+            return selectPrice.value.some(range => {
+                return product.price >= range.min && product.price <= range.max;
+            });
         });
+    }
+    if (selectSize.value.length > 0) {
+        filtered = filtered.filter(product => selectSize.value.includes(product.size));
+    }
+    if (selectColor.value.length > 0) {
+        filtered = filtered.filter(product => selectColor.value.includes(product.color));
+    }
+    return filtered;
+});
 
-        const uniqueSizes = computed(() => {
-            const sizes = products.value.map(product => product.size);
-            return [...new Set(sizes)];
-        });
-
-        const uniqueCategories = computed(() => {
-            const categories = products.value.map(product => product.category);
-            return ['All product', ...new Set(categories)];
-        });
-
-        const uniqueColors = computed(() => {
-            const colors = products.value.map(product => product.color);
-            return [...new Set(colors)];
-        });
-
-        const filteredProducts = computed(() => {
-            let filtered = products.value;
-            if (selectCategory.value !== 'All product') {
-                filtered = filtered.filter(product => product.category === selectCategory.value);
-            }
-            if (selectPrice.value.length > 0) {
-                filtered = filtered.filter(product => {
-                    return selectPrice.value.some(range => {
-                        return product.price >= range.min && product.price <= range.max;
-                    });
-                });
-            }
-            if (selectSize.value.length > 0) {
-                filtered = filtered.filter(product => selectSize.value.includes(product.size));
-            }
-            if (selectColor.value.length > 0) {
-                filtered = filtered.filter(product => selectColor.value.includes(product.color));
-            }
-            return filtered;
-        });
-
-        const handlePriceRange = (range, checked) => {
-            if (checked) {
-                selectPrice.value.push(range);
-            } else {
-                const index = selectPrice.value.indexOf(range);
-                if (index > -1) {
-                    selectPrice.value.splice(index, 1);
-                }
-            }
-        };
-
-        const handleCategoryClick = category => {
-            selectCategory.value = category;
-        };
-
-        const handleSizeClick = size => {
-            if (selectSize.value.includes(size)) {
-                selectSize.value = selectSize.value.filter(s => s !== size);
-            } else {
-                selectSize.value.push(size);
-            }
-        };
-
-        const handleColorClick = color => {
-            if (selectColor.value.includes(color)) {
-                selectColor.value = selectColor.value.filter(c => c !== color);
-            } else {
-                selectColor.value.push(color);
-            }
-        };
-
-        watchEffect(() => {
-            document.title = title.value;
-        });
-
-        return {
-            products,
-            title,
-            priceRanges,
-            uniqueSizes,
-            uniqueCategories,
-            uniqueColors,
-            filteredProducts,
-            handlePriceRange,
-            handleCategoryClick,
-            handleSizeClick,
-            handleColorClick,
-            selectCategory,
-            selectSize,
-            selectColor,
-        };
-    },
-
-    methods: {
-        handleColorClick(color) {
-            if(this.selectColor.includes(color)){
-                this.selectColor = this.selectColor.filter(c => c !== color);
-            }else {
-                this.selectColor = [color]
-            }
+const handlePriceRange = (range, checked) => {
+    if (checked) {
+        selectPrice.value.push(range);
+    } else {
+        const index = selectPrice.value.indexOf(range);
+        if (index > -1) {
+            selectPrice.value.splice(index, 1);
         }
     }
 };
+
+const handleCategoryClick = category => {
+    selectCategory.value = category;
+};
+
+const handleSizeClick = size => {
+    if (selectSize.value.includes(size)) {
+        selectSize.value = selectSize.value.filter(s => s !== size);
+    } else {
+        selectSize.value.push(size);
+    }
+};
+
+const handleColorClick = color => {
+    if (selectColor.value.includes(color)) {
+        selectColor.value = selectColor.value.filter(c => c !== color);
+    } else {
+        selectColor.value.push(color);
+    }
+};
+
+watchEffect(() => {
+    document.title = title.value;
+});
+
+
 </script>
+
 
 <template>
     <main class="pd-header">

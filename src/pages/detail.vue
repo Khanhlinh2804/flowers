@@ -2,7 +2,9 @@
     import { ref, watchEffect, onMounted } from 'vue';
     import { useRoute } from 'vue-router';
     import Related from '../components/Related.vue';
+    import { useCartStore } from '@/stores/useCartStore';
 
+    const data = useCartStore();
     const engo = ['In Stock', 'Free delivery available', 'Sale 30% Off Use Code: Deal30'];
 
     const textwidgets = [
@@ -113,7 +115,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn--danger btn_add-cart">Add to cart</button>
+                    <button type="submit" @click="data.addToCart(product)" class="btn btn--danger btn_add-cart">Add to cart</button>
                 </div>
             </div>
             <div class="textwidget pt-6">

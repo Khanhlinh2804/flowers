@@ -1,6 +1,9 @@
 <script setup>
 import { ref, computed } from 'vue';
 import Search from './search.vue';
+import { useCartStore } from '@/stores/useCartStore';
+import { useWishlistStore } from '@/stores/useWishlistStore';
+
 
 // Props
     const props = defineProps({
@@ -17,6 +20,10 @@ import Search from './search.vue';
     const searchQuery = ref('');
     const itemsPerPage = 12;
     const currentPage = ref(1);
+
+    const data = useCartStore();
+    const index = useWishlistStore();
+
 
     const filteredProducts = computed(() => {
     let filtered = props.products;
@@ -64,14 +71,14 @@ import Search from './search.vue';
                             <div class="socials">
                                 <div class="socials-product" data-tooltip="Add Wishlist" >
                                     <div class="socials-product-wrapper">
-                                        <button type="add-wishlist" class="socials_a">
+                                        <button type="submit" @click="index.addToWishlist" class="socials_a" >
                                             <i class="fa-solid fa-heart-circle-plus"></i>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="socials-product" data-tooltip="Add to Cart" >
                                     <div class="socials-product-wrapper">
-                                        <button type="add-product" class="socials_a">
+                                        <button type="submit"  class="socials_a" @click="data.addToCart(product)">
                                             <i class="fa-solid fa-cart-plus"></i>
                                         </button>
                                     </div>
