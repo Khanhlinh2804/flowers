@@ -3,8 +3,11 @@
     import { useRoute } from 'vue-router';
     import Related from '../components/Related.vue';
     import { useCartStore } from '@/stores/useCartStore';
+import { useWishlistStore } from '@/stores/useWishlistStore';
+    
 
     const data = useCartStore();
+    const wishList = useWishlistStore()
     const engo = ['In Stock', 'Free delivery available', 'Sale 30% Off Use Code: Deal30'];
 
     const textwidgets = [
@@ -51,8 +54,7 @@
             <div class="container">
                 <div class="bread__crumb-text">
                     <router-link :to="{ name: 'client.home' }" class="route-link bread__crumb-link"> Home </router-link>
-                    <router-link :to="{ name: 'client.product'}" class="route-link bread__crumb-link"> Shop
-                    </router-link>
+                    <router-link :to="{ name: 'client.product'}" class="route-link bread__crumb-link"> Shop </router-link>
                     <router-link to="" class="route-link bread__crumb-link"> Category </router-link>
                 </div>
             </div>
@@ -81,7 +83,7 @@
                         <div class="detail-name-icon">
                             <div class="detail-heart" data-tooltip="Wishlist">
                                 <div class="detail-heart-wrapper">
-                                    <router-link to="" class="route-link detail-heart-circle">
+                                    <router-link @click="wishList.addToWishlist(product)" to="" class="route-link detail-heart-circle">
                                         <i class="fa-regular fa-heart"> </i>
                                     </router-link>
                                 </div>

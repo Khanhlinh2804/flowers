@@ -1,22 +1,14 @@
 <script>
+import { useProduct } from '@/stores/filterProduct';
 import { computed, onMounted, ref } from 'vue';
 
     export default {
         setup() {
-            const url = "http://localhost:3000/Product";
+           
+           const productStore = useProduct();
 
-            const products = ref([]);
-
-            onMounted(() => {
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        products.value = data;
-                    })
-                    .catch(error => console.error('Error:' , error));
-            })
             const limitProduct = computed(() => {
-                return products.value.slice(0,8)
+                return productStore.getProduct.slice(0,8)
             })
 
             return {
@@ -47,5 +39,5 @@ import { computed, onMounted, ref } from 'vue';
                     </article>
 
                 </div>
-            </div>
+    </div>
 </template>

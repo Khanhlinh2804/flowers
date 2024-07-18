@@ -6,7 +6,9 @@
     --bg--white: #fbf3f0;
     --bg--red: #f42821;
     --color--green: #28af5b;
-    --color-gray-100: #e2dede95; 
+    --color-gray-100: #e2dede95;
+    --yell: rgb(247, 203, 45);
+    --blue: 
 }
 
 hr{
@@ -36,6 +38,14 @@ body {
 /* main {
     flex: 1;
 } */
+
+.alter-danger{
+    color: var(--bg--red);
+}
+.alter-success{
+    color: var(--color--green);
+}
+
 .pt-1{
     padding-top: 20px;
 }
@@ -52,6 +62,9 @@ body {
 .container {
     margin: 0 120px;
 }
+.container-lg{
+    margin: 0 50px;
+}
 
 .btn{
     text-decoration: none;
@@ -59,6 +72,7 @@ body {
     border-radius: none;
     outline: none;
     cursor: pointer;
+    border: 1px solid black;
 }
 
 .btn--danger{

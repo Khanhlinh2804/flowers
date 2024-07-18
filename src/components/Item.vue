@@ -71,7 +71,7 @@ import { useWishlistStore } from '@/stores/useWishlistStore';
                             <div class="socials">
                                 <div class="socials-product" data-tooltip="Add Wishlist" >
                                     <div class="socials-product-wrapper">
-                                        <button type="submit" @click="index.addToWishlist" class="socials_a" >
+                                        <button type="submit" @click="index.addToWishlist(product)" class="socials_a" >
                                             <i class="fa-solid fa-heart-circle-plus"></i>
                                         </button>
                                     </div>

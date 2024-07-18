@@ -444,3 +444,346 @@
     background-color: black;
 }
 
+/* -----------------------checkout ---------------------- */
+.checkout {
+    display: flex;
+    gap: 50px;
+}
+.checkout_contact{
+    flex: 3;
+}
+.checkout_product{
+    flex: 2;
+}
+.checkout-input{
+    display: flex;
+    gap: 50px;
+}
+
+
+.group-check {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    margin: 20px 0;
+}
+.group-mail{
+    margin: 0px!important;
+}
+
+.check-mail {
+    display: grid;
+    gap: 5px;
+    margin-bottom: 30px;
+}
+
+/* Input field */
+.field-checkout {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    outline: none;
+    background-color: transparent;
+}
+
+/* Input label */
+.label-checkout {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 16px;
+    color: rgba(204, 204, 204, 0);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+/* Input highlight */
+.input-highlight {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background-color: var(--yell);
+    transition: all 0.3s ease;
+}
+
+/* Input field:focus styles */
+.field-checkout:focus+.label-checkout {
+    top: -20px;
+    font-size: 12px;
+    color: var(--yell);
+}
+
+.field-checkout:focus+.label-checkout+.input-highlight {
+    width: 100%;
+}
+
+.email-checkbox{
+    position: relative;
+    display: inline-block;
+}
+.email-checkbox > input{
+    appearance: none;
+    -moz-appearance: none;
+    /* -webkit-appearance: none; */
+    /* z-index: -1; */
+    position: absolute;
+    left: -10px;
+    top: -8px;
+    display: block;
+    margin: 0;
+    width: 15px;
+    /* height: 20px; */
+    background-color: red;
+    box-shadow: none;
+    outline: none;
+    opacity: 0;
+    transform: scale(1);
+    pointer-events: none;
+    transition: opaction .03, transform .2s;
+}
+.email-checkbox > span {
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+}
+.email-checkbox span::before{
+    content: "";
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 3px 11px 3px 1px;
+    border: solid 2px;
+    border-color: rgba(0, 0, 0, 0.6);
+    border-radius: 2px;
+    width: 15px;
+    height: 15px;
+    vertical-align: top;
+    transition: border-color 0.2s,
+        background-color 0.2s;
+}
+.email-checkbox span::after{
+    content: "";
+    display: block;
+    position: absolute;
+    top: 3px;
+    width: 9px;
+    height: 4px;
+    border: solid 2px transparent;
+    border-right: none;
+    border-top: none;
+    transform: translate(3px, 4px) rotate(-45deg);
+}
+.email-checkbox >input:checked,
+.email-checkbox > input:indeterminate {
+    background-color: var(--yell);
+}
+
+.email-checkbox > input:checked + span::before,
+.email-checkbox > input:indeterminate + span::before{
+    /* border-color: var(--yell); */
+    border: none;
+    background-color: var(--yell);
+}
+.email-checkbox > input:checked + span::after,
+.email-checkbox > input:indeterminate + span::after {
+    border-color: black;
+}
+.email-checkbox > input:indeterminate + span::after{
+    border-left: none;
+    transform: translate(4px,3px);
+}
+
+.email-checkbox:hover >input {
+    opacity: 0.04;
+}
+.email-checkbox > input:focus{
+    opacity: .12;
+}
+.email-checkbox:hover > input:focus{
+    opacity: .16;
+}
+.email-checkbox > input:active{
+    opacity: 1;
+    transform: scale(0);
+    transition: transform 0s, opacity 0s;
+}
+.email-checkbox > input:active + span::before{
+    border-color: #85b8b7;
+}
+.email-checkbox > input:checked:active + span::before{
+    border-color: transparent;
+    background-color: rgba(0, green, blue, alpha);
+}
+.checkout-item{
+    display: flex;
+    align-items: center;
+    /* width: 400px; */
+}
+.item_image{
+    flex: 1;
+}
+.item_image img{
+    border: 1px solid var(--text-gray);
+    border-radius: 10%;
+}
+.item_title{
+    flex: 5;
+    padding-left: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.item_title span{
+    color: var(--bg--red);
+}
+.checktotal{
+    padding-top: 20px;
+}
+.total-item{
+    padding-bottom: 10px !important;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.total strong{
+    color: var(--bg--red);
+}
+
+
+.radio-container {
+    margin: 0 auto;
+    max-width: 300px;
+    color: white;
+}
+
+
+.radio-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.radio-button:hover {
+    transform: translateY(-2px);
+}
+
+.radio-button input[type="radio"] {
+    display: none;
+}
+
+.radio-checkmark {
+    display: inline-block;
+    position: relative;
+    width: 12px;
+    height: 12px;
+    margin-right: 10px;
+    border: 2px solid var(--yell);
+    border-radius: 50%;
+}
+
+.radio-checkmark:before {
+    content: "";
+    position: absolute;
+    top: 49%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--yell);
+    transition: all 0.2s ease-in-out;
+}
+
+.radio-button input[type="radio"]:checked~.radio-checkmark:before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.payments {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(to right, #77530a, #ffd277, #77530a, #77530a, #ffd277, #77530a);
+    background-size: 250%;
+    background-position: left;
+    color: var(--yell);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition-duration: 1s;
+    overflow: hidden;
+}
+
+.payments::before {
+    position: absolute;
+    content: "PAYMENT";
+    color: var(--yell);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 97%;
+    height: 90%;
+    border-radius: 8px;
+    transition-duration: 1s;
+    background-color: var(--bg--white);
+    background-size: 200%;
+}
+
+.payments:hover {
+    background-position: right;
+    transition-duration: 1s;
+}
+
+.payments:hover::before {
+    background-position: right;
+    transition-duration: 1s;
+}
+
+.payments:active {
+    transform: scale(0.95);
+}
+.with{
+    width: 700px;
+    gap: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px 0 10px 0;
+    gap: 20px;
+}
+
+.facebook, .google {
+    width: 100%;
+    padding: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.submit-login{
+    padding: 10px 50px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: row;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.submit-login:hover{
+    background-color: var(--text-gray);
+    color: var(--bg--white);
+    outline: invert;
+}
+
+.submit-login p{
+    font-size: 15px;
+}

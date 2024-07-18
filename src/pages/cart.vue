@@ -1,17 +1,21 @@
 <script setup>
-import { ref, watchEffect } from 'vue';
+import { onMounted, ref, watchEffect } from 'vue';
 import { useCartStore } from '@/stores/useCartStore';
 
 const title = ref('Cart');
-const data = useCartStore();
+const cartStore = useCartStore();
 
 const getProductQuantity = (id) => {
-    const product = data.products.find(product => product.id === id);
-    return product ? product.quantity : 0;
+  const product = cartStore.products.find(product => product.id === id);
+  return product ? product.quantity : 0;
 }
 
 watchEffect(() => {
   document.title = title.value;
+});
+
+onMounted(() => {
+  cartStore.fetchProducts();
 });
 </script>
 
@@ -20,14 +24,14 @@ watchEffect(() => {
     <div class="bread__crumb">
       <div class="container">
         <div class="bread__crumb-text">
-          <router-link to=""> Home </router-link>
+          <router-link to="/"> Home </router-link>
           <i class="fa-solid fa-chevron-right"></i>
           <p>Your shopping cart</p>
         </div>
       </div>
     </div>
     <div class="container">
-      <form action="" method="post">
+      <form @submit.prevent="cartStore.submitCart">
         <div class="cart">
           <table class="table cart_table">
             <thead>
@@ -42,15 +46,15 @@ watchEffect(() => {
               </tr>
             </thead>
             <tbody>
-              <tr v-if="!data.cartItems.length">
+              <tr v-if="cartStore.cartItems && !cartStore.cartItems.length">
                 <td colspan="7">Your cart is empty</td>
               </tr>
-              <tr class="cart__data" v-else v-for="item in data.cartItems" :key="item.id">
+              <tr v-else v-for="item in cartStore.cartItems" :key="item.id" class="cart__data">
                 <td class="cart-checkbox">
-                  <input type="checkbox" name="">
+                  <input type="checkbox" :checked="cartStore.selectedItems.includes(item.id)" @change="cartStore.checkItem(item)">
                 </td>
-                <td class="" data-label="Product">
-                  <img :src="item.image.image01" alt="" height="150px" width="150px" srcset="">
+               <td data-label="Product">
+                  <img :src="item.image.image01" alt="" height="150px" width="150px">
                 </td>
                 <td data-label="Name">
                   <p>{{ item.name }}</p>
@@ -60,17 +64,17 @@ watchEffect(() => {
                 </td>
                 <td data-label="Price" v-else>
                   ${{ item.price }}
-                </td>
+                </td> 
                 <td class="cart-quantity" data-label="Quantity">
                   <div id="quantity">
                     <div class="quantity-input">
                       <input type="text" :value="item.quantity" min="1" :max="getProductQuantity(item.id)" id="amount" name="amount">
                     </div>
                     <div class="quantity-button">
-                      <div @click="data.incrementQ(item)" class="quantity-button-up">
+                      <div @click="cartStore.incrementQ(item)" class="quantity-button-up">
                         <i class="fa-solid fa-caret-up"></i>
                       </div>
-                      <div @click="data.decrementQ(item)" class="quantity-button-down">
+                      <div @click="cartStore.decrementQ(item)" class="quantity-button-down">
                         <i class="fa-solid fa-sort-down"></i>
                       </div>
                     </div>
@@ -83,7 +87,7 @@ watchEffect(() => {
                   ${{ item.price * item.quantity }}
                 </td>
                 <td class="cart-remove">
-                  <div @click="data.removeItem(item)" class="remove-button">
+                  <div @click="cartStore.removeItem(item)" class="remove-button">
                     <i class="fa-solid fa-xmark"></i>
                   </div>
                 </td>
@@ -93,8 +97,7 @@ watchEffect(() => {
         </div>
         <div class="total">
           <div class="cart__update">
-            <button type="submit">Update Cart</button>
-            <router-link to="/product" class="cart__shop">Continue Shopping</router-link>
+            <router-link to="/product" class="cart__shop bg-black">Continue Shopping</router-link>
           </div>
           <div class="cart__check">
             <div class="cart_check-total">
@@ -103,13 +106,13 @@ watchEffect(() => {
             <table class="table">
               <tbody>
                 <tr class="cart_check-data">
-                  <th>total</th>
-                  <td>$60.00</td>
+                  <th>Total</th>
+                  <td>${{ cartStore.totalSelectPrice }}</td>
                 </tr>
               </tbody>
             </table>
             <div class="cart__update pt-3">
-              <router-link to="/product" class="cart__shop">Continue Shopping</router-link>
+              <button type="submit" class="cart__shop">Checkout</button>
             </div>
           </div>
         </div>
@@ -119,9 +122,9 @@ watchEffect(() => {
 </template>
 
 <style>
- *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
- }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 </style>

@@ -1,17 +1,19 @@
 <script setup>
+
 import { useWishlistStore } from '@/stores/useWishlistStore';
 import { onMounted, ref, watchEffect } from 'vue';
 
-const data = useWishlistStore();
+
 const title= ref('Wishlist');
+const wishlistStore = useWishlistStore();
 
 onMounted(() => {
-    data.fetchProducts();
+    wishlistStore.fetchProducts();
 });
 
 watchEffect(() => {
     document.title= title.value;
-})
+});
 
 </script>
 
@@ -33,29 +35,28 @@ watchEffect(() => {
         </div>
         </section>
         <div class="container pt-6">
-            <div class="container_card">
-                    <div class="card" >
-                        <article class="cart_article" v-if="!data.wishlistItems.length">
-                            <p>NO product Wishlist</p>    
-                        </article>
-                        <article class="card__article" v-else v-for="item in data.wishlistItems" :key="item.id">
-                            <router-link :to="/detail/ + item.id">
+            <div class="container_card pb-6 pt-6">
+                <div class="card" >
+                    <article class="card__article" v-for="index in wishlistStore.wishlistItems" :key="index.id" >
+                        <router-link :to="'/detail/' + index.id">
+                            <img :src="index.image.image01" alt="image"
+                            class="card__img">
+                        </router-link>
+                                <div class="card__sale" v-if="index['sale-price'] !== 0">
+                                    {{ ((index['price'] - index['sale-price'] ) / index['price'] * 100) .toFixed(0) }} %
+                                </div>
                                 
-                            </router-link>
-                                <template v-if="item['sale-price'] !== 0 && item['price'] && item['sale-price']">
-                                    <div class="card__sale">
-                                        {{ (((item['price'] - item['sale-price']) / item['price']) * 100).toFixed(0)}} %
-                                    </div>  
-                                </template>
-                            <div class="card__data">
-                                <h2 class="card__title">{{ item['name'] }}</h2>
-                                <span class="card__description">{{ item['price'] }}</span>
-                            </div>
-                        </article>
-
-                    </div>
+                                
+                                
+                        <div class="card__data">
+                            <h2 class="card__title">{{ index.name }}</h2>
+                            <span class="card__description">50$</span>
+                        </div>
+                    </article>
+                </div>
             </div>
-        </div> 
+        </div>
+        
     </main>
 </template>
 

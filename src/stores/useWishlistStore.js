@@ -1,31 +1,37 @@
 import { defineStore } from "pinia";
 import { useToast } from "vue-toastification";
 
-
 const toast = useToast();
 
 export const useWishlistStore = defineStore('wishlist', {
-    state:  () => ({
+    state: () => ({
         products: [],
-        wishlistItems: []
+        wishlistItems:  [],
+        // wishlistItems: JSON.parse(localStorage.getItem('wishlistItems')) || [],
     }),
     getters: {
         countWishlistItem: (state) => {
             return state.wishlistItems.length;
         },
-        getProduct: (state) => {
+        getWishlist: (state) => {
             return state.products;
         }
     },
     actions: {
+        
         addToWishlist(item) {
-            let index = this.wishlistItems.findIndex(wishlistItem => wishlistItem.id === item.id);
-            if(index === -1) {
-                this.wishlistItems.push({ ...item, quantity: 1});
-                toast.success(" Add item Wishlist success", {
+            let index = this.wishlistItems.findIndex(product => product.id === item.id);
+            if (index === -1) {
+                this.wishlistItems.push({ ...item, quantity: 1 });
+                toast.success("Add item success", {
                     timeout: 1000
-                })
+                });
+            } else {
+                toast.error("This item is already in the wishlist", {
+                    timeout: 1000
+                });
             }
+            // this.saveWishlist();
         },
         async fetchProducts() {
             try {
@@ -36,5 +42,9 @@ export const useWishlistStore = defineStore('wishlist', {
                 console.error('Error fetching products:', error);
             }
         },
+        saveWishlist() {
+            localStorage.setItem('wishlistItems', JSON.stringify(this.wishlistItems));
+        },
+
     }
-})
+});

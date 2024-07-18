@@ -4,6 +4,7 @@ import Login from "../pages/login.vue"
 import Sigin from "../pages/sigin.vue"
 import ResetPassword from "../pages/resetpw.vue"
 import Wishlist from "../pages/wishlist.vue";
+import Checkout from "../pages/checkout.vue";
 
 const user = [
     {
@@ -40,6 +41,11 @@ const user = [
                 path: "/cart",
                 name: "client.cart",
                 component: () => import('../pages/cart.vue'),
+            },
+            {
+                path: "/checkout",
+                name: "client.checkout",
+                component: () => Checkout,
             },
             {
                 path: "/feature",

@@ -1,5 +1,6 @@
 <script>
 import { computed, onMounted, ref, watchEffect } from 'vue';
+import { useProduct} from '@/stores/filterProduct';
 import Slide from '@/components/Slide.vue';
 import Product8 from '@/components/Product8.vue';
 
@@ -9,36 +10,38 @@ export default {
         Product8,
     },
     setup() {
-        const url = "http://localhost:3000/Product";
         
         const banner = "Wedding Flower Sale 30% Off";
         const title = ref('Home');
-        const products = ref([]);
+        const productStore = useProduct();
+        const {fetchProducts, setFilterType} = productStore;
         
         onMounted(() => {
-            fetch(url)
-                .then(response => response.json()) // fixed naming of response
-                .then(data => {
-                    products.value = data;
-                })
-                .catch(error => console.error('Error: ', error));
+              fetchProducts();  
         });
 
 
         const UniqueType = computed(()=> {
-            const types = products.value.map(product => product.type);
-            return [... new Set(types)]
+            if(productStore.value && Array.isArray(productStore.value)){
+                const types = productStore.value.map(product => product.type);
+                return [... new Set(types)]
+            }
+            return [];
         })
         
         watchEffect(() => {
             document.title = title.value;
         });
+        const filterProducts = (type) => {
+            setFilterType(type);
+        }
 
         return {
             banner,
             title,
-            products,
+            productStore,
             UniqueType,
+            filterProducts
         };
     }
 };
@@ -118,12 +121,11 @@ export default {
             <h1 class="pt-6 font-size">new product</h1>
             <div class="filter">
                 <ul class="filter__category">
-                    <template v-for=" types in UniqueType " :key="type">
-                        <li class="filter__category-item" >
-                            {{ types }}
+                    <template v-for=" type in UniqueType " :key="type">
+                        <li class="filter__category-item" @click="filterProducts(type)">
+                            {{ type }}
                         </li>
-                    </template>
-
+                    </template> 
                 </ul>
             </div>
             <!-- <div class=" banner__content"> -->

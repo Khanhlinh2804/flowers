@@ -1,14 +1,25 @@
 <script setup>
+import { useAccount } from '@/stores/useAccount';
 import { useCartStore } from '@/stores/useCartStore';
 import { useWishlistStore } from '@/stores/useWishlistStore';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 
     const cartStore = useCartStore();
     const wishlistStore = useWishlistStore();
+    const authStore = useAccount();
+    const dropdownVisible = ref(false);
+
+
+    const toggleDropdown = () => {
+        dropdownVisible.value = !dropdownVisible.value;
+    }
+    const onLogout = () => {
+        authStore.logoutUser();
+    }
 
     onMounted(() => {
         cartStore.fetchProducts();
-    })
+    });
 </script>
 
 <template>
@@ -35,16 +46,25 @@ import { onMounted } from 'vue';
                         </li>
                     </ul>
                 </div>
-                <ul class="header__icon-list">
-                    <!-- <li class="header__icon-item">
-                        <router-link to="" class="header__item-link">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </router-link>
-                    </li> -->
-                    <li class="header__icon-item">
-                        <router-link to="/login" class="header__item-link">
+                <ul class="header__icon-list ">
+                    <li class="header__icon-item dropdown">
+                        <button @click="toggleDropdown" class="icon-cart-header header__item-link">
                             <i class="fa-regular fa-user"></i>
-                        </router-link>
+                        </button>
+                        <div v-if="dropdownVisible" class="dropdown-menu">
+                            <div >
+                                <router-link to="/login"  class="dropdown-item">
+                                    <i class="fa-regular fa-user"></i> Login
+                                </router-link>
+                            </div>
+
+                            <button @click.prevent="onLogout" 
+                                v-if="authStore.user.uid"
+                                class="dropdown-button dropdown-item">
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                    logout
+                            </button>
+                        </div>
                     </li>
                     <li class="header__icon-item icon-cart">
                         <router-link :to="{name : 'client.wishlist'}" class="icon-cart-header header__item-link">
@@ -52,12 +72,13 @@ import { onMounted } from 'vue';
                             <p>{{ wishlistStore.countWishlistItem }}</p>
                         </router-link>
                     </li>
-                    <li class="header__icon-item icon-cart">
+                    <li class="header__icon-item icon-cart" >
                         <router-link to="/cart" class="header__item-link icon-cart-header">
                             <i class="fa-solid fa-bag-shopping"> </i>
                             <p>{{ cartStore.countCartItem }}</p>
                         </router-link>
                     </li>
+
                 </ul>
                 <div class="header__icon" onclick=showSidebar()>
                     <i class="fa-solid fa-bars"></i>
@@ -119,6 +140,42 @@ import { onMounted } from 'vue';
 
 .icon-cart-header p:hover {
     color: var(--text-black);
+}
+button{
+    border: none;
+    font-size: 20px;
+    background: none
+
+}
+.dropdown{
+    position: relative;
+}
+
+.dropdown-button{
+    font-size: 12px
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 120%;
+  right:20% ;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: black;
+  white-space: nowrap;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
 }
 
 </style>
