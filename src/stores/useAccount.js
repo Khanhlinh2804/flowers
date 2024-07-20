@@ -1,13 +1,12 @@
 import { defineStore } from "pinia";
 import { useToast } from "vue-toastification";
 import { auth, provider } from "@/assets/js/index";
-import { 
+import {
     createUserWithEmailAndPassword,
-    GoogleAuthProvider,
-    onAuthStateChanged, 
-    signInWithEmailAndPassword, 
-    signInWithPopup, 
-    signOut 
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    signOut,
+    onAuthStateChanged
 } from "firebase/auth";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
@@ -15,28 +14,29 @@ import { useRouter } from "vue-router";
 const toast = useToast();
 
 export const useAccount = defineStore('authStore', () => {
-    const user = ref({});
+    const user = ref(null);
     const router = useRouter();
+
     const init = () => {
         onAuthStateChanged(auth, (userDetail) => {
             if (userDetail) {
-                const uid = userDetail.uid;
-                user.value = { email: userDetail.email, uid}
-                router.push({ name: 'client.home' })
-                // ...
+                user.value = { email: userDetail.email, uid: userDetail.uid };
+                if (router.currentRoute.value.name === 'client.login') {
+                    router.push({ name: 'client.home' });
+                }
             } else {
-                user.value = {};
-                router.replace({ name: 'auth'})
+                user.value = null;
+                if (router.currentRoute.value.name !== 'client.login') {
+                    router.replace({ name: 'client.login' });
+                }
             }
         });
-    }
-    
-    
+    };
+
     const registerUser = (account) => {
         createUserWithEmailAndPassword(auth, account.email, account.password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                router.push({ name: 'client.login' })
+            .then(() => {
+                router.push({ name: 'client.login' });
                 toast.success("User registered successfully!");
             })
             .catch((error) => {
@@ -47,9 +47,8 @@ export const useAccount = defineStore('authStore', () => {
 
     const loginUser = (account) => {
         signInWithEmailAndPassword(auth, account.email, account.password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                router.push({ name: 'client.home' })
+            .then(() => {
+                router.push({ name: 'client.home' });
                 toast.success("User logged in successfully!");
             })
             .catch((error) => {
@@ -58,26 +57,31 @@ export const useAccount = defineStore('authStore', () => {
             });
     };
 
-    const logoutUser = ( ) => {
-        signOut(auth).then(() => {
-            toast.success('logout success');
-        }).catch((error) => {
-            // An error happened.
-        });
-    }
+    const logoutUser = () => {
+        signOut(auth)
+            .then(() => {
+                user.value = null;
+                router.push({ name: 'client.login' });
+                toast.success('Logout successful');
+            })
+            .catch((error) => {
+                toast.error('Logout failed');
+                console.error(error.message);
+            });
+    };
 
     const loginWithGoogle = () => {
         signInWithPopup(auth, provider)
-            .then((result) => {
-                const user = result.user;
-                router.push({ name: 'home' })
+            .then(() => {
+                router.push({ name: 'client.home' });
                 toast.success("User logged in with Google successfully!");
-            }).catch((error) => {
+            })
+            .catch((error) => {
                 toast.error(error.message);
                 console.log(error.message);
             });
-    }
-    
+    };
+
     return {
         registerUser,
         loginUser,

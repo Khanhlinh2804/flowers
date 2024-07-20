@@ -1,9 +1,11 @@
+// userCartStore.js
 import axios from 'axios';
 import { defineStore } from 'pinia';
 import { useToast } from 'vue-toastification';
-import { useRouter } from "vue-router";
+import { useRouter } from 'vue-router';
 
 const toast = useToast();
+const router = useRouter();
 
 export const useCartStore = defineStore('cart', {
     state: () => ({
@@ -12,12 +14,8 @@ export const useCartStore = defineStore('cart', {
         selectedItems: JSON.parse(localStorage.getItem('selectedItems')) || [],
     }),
     getters: {
-        countCartItem: (state) => {
-            return state.cartItems.length;
-        },
-        getProduct: (state) => {
-            return state.products;
-        },
+        countCartItem: (state) => state.cartItems.length,
+        getProduct: (state) => state.products,
         totalSelectPrice: (state) => {
             return state.cartItems.reduce((total, item) => {
                 if (state.selectedItems.includes(item.id)) {
@@ -25,94 +23,82 @@ export const useCartStore = defineStore('cart', {
                     return total + price * item.quantity;
                 }
                 return total;
-            }, 0)
+            }, 0);
         },
-        selectedCartItems: (state) => {
-            return state.cartItems.filter(item => state.selectedItems.includes(item.id));
-        }
+        selectedCartItems: (state) => state.cartItems.filter(item => state.selectedItems.includes(item.id)),
     },
-
     actions: {
         addToCart(item) {
-            let index = this.cartItems.findIndex(cartItem => cartItem.id === item.id);
+            const index = this.cartItems.findIndex(cartItem => cartItem.id === item.id);
             if (index === -1) {
                 this.cartItems.push({ ...item, quantity: 1 });
                 toast.success("Your item has been added", { timeout: 1000 });
             } else {
                 this.cartItems[index].quantity += 1;
-                toast.success("Your item quantity has been updated", {
-                    timeout: 1000
-                });
+                toast.success("Your item quantity has been updated", { timeout: 1000 });
             }
             this.saveCart();
         },
         async fetchProducts() {
             try {
                 const response = await axios.get('http://localhost:3000/Product');
-                const data = response.data;
-                this.products = data;
+                this.products = response.data;
             } catch (error) {
                 console.error('Error fetching products:', error);
             }
         },
         incrementQ(item) {
-            let index = this.cartItems.findIndex(cartItem => cartItem.id === item.id);
-            let product = this.products.find(product => product.id === item.id);
+            const index = this.cartItems.findIndex(cartItem => cartItem.id === item.id);
+            const product = this.products.find(product => product.id === item.id);
 
-            if (!product) {
-                toast.error("Product not found", { timeout: 1000 });
-                return;
+            if (product && this.cartItems[index].quantity < product.stock) {
+                this.cartItems[index].quantity += 1;
+                toast.success("Item quantity has been increased", { timeout: 1000 });
+                this.saveCart();
+            } else {
+                toast.error("No more stock available", { timeout: 1000 });
             }
-
-            if (index !== -1) {
-                if (this.cartItems[index].quantity < product.quantity) {
-                    this.cartItems[index].quantity += 1;
-                    toast.success("Your item quantity has been increased", { timeout: 1000 });
-                } else {
-                    toast.error("Not enough stock", { timeout: 1000 });
-                }
-            }
-            this.saveCart();
         },
         decrementQ(item) {
-            let index = this.cartItems.findIndex(cartItem => cartItem.id === item.id);
-
-            if (index !== -1) {
-                if (this.cartItems[index].quantity > 1) {
-                    this.cartItems[index].quantity -= 1;
-                    toast.success("Your item quantity has been decreased", { timeout: 1000 });
-                } else {
-                    this.cartItems = this.cartItems.filter(cartItem => cartItem.id !== item.id);
-                    toast.success("Your item has been removed from the cart", { timeout: 1000 });
-                }
-            }
-            this.saveCart();
-        },
-        checkItem(item) {
-            const index = this.selectedItems.findIndex(id => id === item.id);
-            if (index === -1) {
-                this.selectedItems.push(item.id)
+            const index = this.cartItems.findIndex(cartItem => cartItem.id === item.id);
+            if (this.cartItems[index].quantity > 1) {
+                this.cartItems[index].quantity -= 1;
+                toast.success("Item quantity has been decreased", { timeout: 1000 });
+                this.saveCart();
             } else {
-                this.selectedItems.splice(index, 1);
+                this.removeItem(item);
             }
-            this.saveCart();
         },
         removeItem(item) {
-            this.cartItems = this.cartItems.filter(product => product.id !== item.id);
-            this.selectedItems = this.selectedItems.filter(id => id !== item.id);
-            toast.error("Remove item", {
-                timeout: 1000
-            });
+            this.cartItems = this.cartItems.filter(cartItem => cartItem.id !== item.id);
+            toast.success("Item removed from cart", { timeout: 1000 });
             this.saveCart();
+        },
+        removeSelectedItems() {
+            this.cartItems = this.cartItems.filter(cartItem => !this.selectedItems.includes(cartItem.id));
+            this.selectedItems = [];
+            toast.success("Selected items removed from cart", { timeout: 1000 });
+            this.saveCart();
+        },
+        
+        clearCart() {
+            this.cartItems = [];
+            this.selectedItems = [];
+            localStorage.removeItem('cartItems');
+            localStorage.removeItem('selectedItems');
+            toast.success("Cart has been cleared", { timeout: 1000 });
+        },
+        checkItem(item) {
+            const index = this.selectedItems.indexOf(item.id);
+            if (index > -1) {
+                this.selectedItems.splice(index, 1);
+            } else {
+                this.selectedItems.push(item.id);
+            }
+            localStorage.setItem('selectedItems', JSON.stringify(this.selectedItems));
         },
         saveCart() {
             localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
-            localStorage.setItem('selectedItems', JSON.stringify(this.selectedItems));
-        },
-        async submitCart() {
-            const router = useRouter();  // Đưa dòng này vào bên trong phương thức submitCart
-            this.saveCart();
-            router.push({ name: 'client.checkout' });
         }
     }
 });

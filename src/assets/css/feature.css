@@ -460,13 +460,18 @@
     gap: 50px;
 }
 
+.checkout-alter{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 
 .group-check {
     position: relative;
     width: 100%;
     flex: 1;
     display: flex;
-    margin: 20px 0;
+    margin: 20px 0 5px 0;
 }
 .group-mail{
     margin: 0px!important;
@@ -653,6 +658,12 @@
     color: var(--bg--red);
 }
 
+.total-clear{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .radio-container {
     margin: 0 auto;

@@ -1,14 +1,26 @@
 <script setup>
 import { onMounted, ref, watchEffect } from 'vue';
 import { useCartStore } from '@/stores/useCartStore';
+import { useRouter } from 'vue-router';
+import { useAccount } from '@/stores/useAccount';
 
 const title = ref('Cart');
 const cartStore = useCartStore();
+const router = useRouter();
+const authStore = useAccount();
 
 const getProductQuantity = (id) => {
   const product = cartStore.products.find(product => product.id === id);
   return product ? product.quantity : 0;
-}
+};
+
+const submitCart = () => {
+  try {
+    router.push({ name: 'client.checkout' });
+  } catch (error) {
+    console.error("Error submitting cart:", error);
+  }
+};
 
 watchEffect(() => {
   document.title = title.value;
@@ -31,7 +43,7 @@ onMounted(() => {
       </div>
     </div>
     <div class="container">
-      <form @submit.prevent="cartStore.submitCart">
+      <form @submit.prevent="submitCart">
         <div class="cart">
           <table class="table cart_table">
             <thead>
@@ -53,7 +65,7 @@ onMounted(() => {
                 <td class="cart-checkbox">
                   <input type="checkbox" :checked="cartStore.selectedItems.includes(item.id)" @change="cartStore.checkItem(item)">
                 </td>
-               <td data-label="Product">
+                <td data-label="Product">
                   <img :src="item.image.image01" alt="" height="150px" width="150px">
                 </td>
                 <td data-label="Name">
@@ -96,8 +108,14 @@ onMounted(() => {
           </table>
         </div>
         <div class="total">
-          <div class="cart__update">
-            <router-link to="/product" class="cart__shop bg-black">Continue Shopping</router-link>
+          <div class="total-clear">
+            <div class="cart__update">
+              <router-link to="/product" class="cart__shop bg-black">Continue Shopping</router-link>
+            </div>
+            <div class="cart__update">
+              <span @click="cartStore.clearCart" class="cart__shop bg-black"> Clear All item</span>
+            </div>
+            
           </div>
           <div class="cart__check">
             <div class="cart_check-total">

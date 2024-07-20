@@ -2253,6 +2253,14 @@ th {
     background-color: black;
 }
 
+.cart__update span{
+    border:  1px solid black;
+    color: var(--bg--white);
+    background-color: var(--text-black);
+    padding: 10px 30px 10px 30px;
+    cursor: pointer;
+}
+
 .cart__update a {
     background-color: var(--bg--red);
     border: 1px solid var(--bg--red);
